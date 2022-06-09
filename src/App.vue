@@ -4,25 +4,18 @@
   <div class="wrapper-content">
     <div class="view">
       <div class="container">
-        <TweetsList />
-         <ul>
-            <li v-for="tweet in items" :key="tweet.id">
-                <img style="width:30px; height:30px;" :src="tweet.avatar" alt="">
-                <p>{{tweet.body}}</p>
-                <p>{{tweet.date}}</p>
-            </li>
-        </ul>
+        <TweetsList :items="items" />
       </div><!-- end container -->
     </div>
   </div><!-- end wrapper-content -->
   <!-- footer -->
 </div><!-- end wrapper -->
-
 </template>
-<script>
-import TweetsList from '@/components/TweetsList'
 
+<script>
+import TweetsList from '@/components/TweetsList.vue'
 export default {
+  components: {TweetsList},
   data() {
         return {
             items: [{
@@ -55,6 +48,5 @@ export default {
 
         }
     },
-  components: {TweetsList},
 }
 </script>
