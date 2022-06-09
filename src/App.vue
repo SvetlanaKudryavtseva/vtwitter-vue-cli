@@ -4,6 +4,7 @@
   <div class="wrapper-content">
     <div class="view">
       <div class="container">
+        <Form @onSubmit="handleSubmit"/>
         <TweetsList :items="items" />
       </div><!-- end container -->
     </div>
@@ -13,9 +14,11 @@
 </template>
 
 <script>
-import TweetsList from '@/components/TweetsList.vue'
+import Form from '@/components/Form';
+import TweetsList from '@/components/TweetsList';
+
 export default {
-  components: {TweetsList},
+  components: { Form, TweetsList },
   data() {
         return {
             items: [{
@@ -36,17 +39,11 @@ export default {
         }
     },
     methods: {
-        onSubmit() {
-            this.items.push({
-                id: Math.round(Math.random() * 30),
-                avatar: `https://avatars.dicebear.com/api/male/${Date.now()}.svg`,
-                body: this.item,
-                date: new Date(Date.now()).toLocaleString(),
-            });
-            // reset
-            this.item = "";
-
+        handleSubmit(item){
+          this.items.push(item)
         }
-    },
+
+    }
+    
 }
 </script>
