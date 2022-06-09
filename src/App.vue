@@ -2,8 +2,10 @@
 <div class="wrapper">
   <!-- header -->
   <div class="wrapper-content">
-    <div class="container">
-      <TweetsList />
+    <div class="view">
+      <div class="container">
+        <TweetsList />
+      </div><!-- end container -->
     </div>
   </div><!-- end wrapper-content -->
   <!-- footer -->
