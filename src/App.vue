@@ -4,7 +4,7 @@
   <div class="wrapper-content">
     <div class="view">
       <div class="container">
-        <!-- <Form @onSubmit="handleSubmit"/> -->
+        <Form @onSubmit="handleSubmit"/>
         <TweetsList :items="items" />
       </div><!-- end container -->
     </div>
@@ -14,13 +14,14 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import Form from '@/components/Form';
 import TweetsList from '@/components/TweetsList';
 
 export default {
   components: { Form, TweetsList },
   setup(){
-    const items = [
+    const items = ref([
       {
           id: 1,
           avatar: `https://avatars.dicebear.com/api/male/1.svg`,
@@ -35,9 +36,13 @@ export default {
           likes: 5,
           date: new Date(Date.now()).toLocaleString(),
       },
-    ]
+    ])
+
+    const handleSubmit = item => items.value.push(item)
+
     return {
-      items
+      items,
+      handleSubmit
     }
   }
 // export default {
