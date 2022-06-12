@@ -1,29 +1,47 @@
 <template>
+    <p>123</p>
     <form @submit.prevent="onSubmit">
         <textarea v-model="body" required placeholder="Type tweet here" />
         <button class="btn btnTweet" type="submit">Post tweet</button>
     </form>
 </template>
 <script>
-export default{
-    data(){
-        return {
-            body: ''
-        }
-    },
-    methods: {
-        onSubmit() {
-            this.$emit('onSubmit', {
+import { ref } from 'vue'
+export default {
+    setup(props, {_, emit }) {
+        const body = ref('')
+        const onSubmit = () => {
+            emit('onSubmit', {
                 id: Math.round(Math.random() * 30),
                 avatar: `https://avatars.dicebear.com/api/male/${Date.now()}.svg`,
-                body: this.body,
+                body: body.value,
                 likes: 0,
                 date: new Date(Date.now()).toLocaleString(),
-            });
-            // reset
-            this.body = "";
+            })
+            body.value = ''
         }
+        return { body, onSubmit }
     }
 }
+// export default{
+//     data(){
+//         return {
+//             body: ''
+//         }
+//     },
+//     methods: {
+//         onSubmit() {
+//             this.$emit('onSubmit', {
+//                 id: Math.round(Math.random() * 30),
+//                 avatar: `https://avatars.dicebear.com/api/male/${Date.now()}.svg`,
+//                 body: this.body,
+//                 likes: 0,
+//                 date: new Date(Date.now()).toLocaleString(),
+//             });
+//             // reset
+//             this.body = "";
+//         }
+//     }
+// }
 
 </script>
