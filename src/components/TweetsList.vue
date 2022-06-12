@@ -4,14 +4,14 @@
         <option value="likes">Sort by likes</option>
     </select>
 
-    <p>{{ sortBy }}</p>
+    <!-- <p>{{ sortBy }}</p> -->
     <ul>
-        <TweetsItem v-for="item in items" :key="item.id" :item="item"/>
+        <TweetsItem v-for="item in sortedItems" :key="item.id" :item="item"></TweetsItem>
     </ul>
 </template>
 
 <script>
-import { ref}  from 'vue'
+import { ref, computed}  from 'vue'
 import TweetsItem from '@/components/TweetsItem.vue'
 
 export default {
@@ -22,9 +22,16 @@ export default {
             required: true,
         }
     },
-    setup() {
+    setup( {items} ) {
         const sortBy = ref('date')
-        return { sortBy }
+
+        const sortedItems = computed (() => {
+            return items.sort((a, b ) => {
+                if (a[sortBy.value] > b[sortBy.value]) return -1
+                if (a[sortBy.value] < b[sortBy.value]) return 1
+        })
+        })
+        return { sortBy, sortedItems }
     }
 }
 </script>
